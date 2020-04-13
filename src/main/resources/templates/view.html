@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LIVE Coronavirus statistics</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<div class="container my-2">
+    <div class="card">
+        <div class="card-body">
+            <center><input id="myInput" type="text" onkeyup="myFunction()" placeholder="Search for countries..."></center>
+            <table>
+                <tr>
+                    <th style="padding:10px"></th>
+                </tr>
+            </table>
+                <center><div class="col-md-10">
+                    <table id="myTable" class="table table-striped table-responsive-md">
+                        <thead>
+                        <tr>
+                            <th>State</th>
+                            <th>Region</th>
+                            <th>Infected</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="object : ${list}">
+                            <td th:text="${object.state}"></td>
+                            <td th:text="${object.region}"></td>
+                            <td th:text="${object.infected}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div></center>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+        }
+    }
+    }
+</script>
+
+</body>
+</html>
